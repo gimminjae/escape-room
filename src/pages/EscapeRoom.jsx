@@ -94,7 +94,7 @@ function EscapeRoom() {
                     <span><p>💡 다음 사물에 집중</p>달력, 일기장, 편지 봉투, 참빛</span>
                 </div>
                 <h1 className='my-5'><p className='text-6xl text-[red] flex gap-5 my-3'><FaKey />Hint</p><p className='text-2xl'>1단계, 2단계에 각각 2개씩의 힌트를 획득할 수 있습니다.</p><p className='text-2xl'>한 번 확인한 힌트는 잘 메모해두시기 바랍니다.</p></h1>
-                <button className='btn btn-info' onClick={() => {
+                <button className='btn btn-info btn-wide' onClick={() => {
                     setGetHint(prev => !prev)
                     setHintFloor(0)
                 }}>힌트 얻기</button>
