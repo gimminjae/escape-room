@@ -85,7 +85,7 @@ function EscapeRoom() {
         }
         {
             loginedTeam &&
-            <div className='container mx-auto w-1/2'>
+            <div className='container mx-auto w-2/3'>
                 <h1 className='text-6xl my-5 flex gap-5'><GiPrisoner />방탈출</h1>
                 <p className='my-5'><p className='text-2xl'>{`여러분 안녕하세요`}</p><p className='text-2xl'>방탈출은 총 2개의 단계로 구성되어 있습니다.</p></p>
                 <p className='my-5'><p className='text-3xl'>1 단계</p><p className='text-2xl'>다음 지령을 찾아 수행하시오</p></p>
