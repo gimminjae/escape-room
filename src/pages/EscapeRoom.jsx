@@ -1,7 +1,22 @@
 import React, { useState } from 'react'
 import cookie from '../hooks/cookie'
+import { GiPrisoner } from "react-icons/gi";
+import { FaKey } from "react-icons/fa6";
+
 
 function EscapeRoom() {
+    const idList = [
+        "086527",
+        "095723",
+        "101010",
+        "103857",
+        "104837",
+        "204872",
+        "209483",
+        "294857",
+        "402848",
+        "593754"
+    ]
     const hintList1 = [
         {
             id: 1,
@@ -56,10 +71,14 @@ function EscapeRoom() {
         {
             !loginedTeam &&
             <div className='container mx-auto w-1/2'>
-                <p>팀을 입력하세요</p>
+                <p>팀 아이디를 입력하세요</p>
                 <input type="text" value={team} onChange={(e) => setTeam(e.target.value)}/>
                 <button className='btn btn-primary mx-5' onClick={() => {
                     cookie.set('team', team)
+                    if (!idList.includes(team)) {
+                        alert("올바른 팀 아이디가 아닙니다.\n다시 입력해 주세요")
+                        return
+                    }
                     window.location.href = window.location.href
                 }}>Go Go</button>
             </div>
@@ -67,23 +86,24 @@ function EscapeRoom() {
         {
             loginedTeam &&
             <div className='container mx-auto w-1/2'>
-                <h1 className='text-6xl my-5'>방탈출</h1>
-                <p className='my-5'><p>{`${loginedTeam}팀 여러분 안녕하세요`}</p><p>방탈출은 총 2개의 단계로 구성되어 있습니다.</p></p>
-                <p className='my-5'><p className='text-2xl'>1단계</p>다음 지령을 찾아 수행하시오</p>
-                <div role="alert" class="alert alert-info">
+                <h1 className='text-6xl my-5 flex gap-5'><GiPrisoner />방탈출</h1>
+                <p className='my-5'><p className='text-2xl'>{`여러분 안녕하세요`}</p><p className='text-2xl'>방탈출은 총 2개의 단계로 구성되어 있습니다.</p></p>
+                <p className='my-5'><p className='text-3xl'>1 단계</p><p className='text-2xl'>다음 지령을 찾아 수행하시오</p></p>
+                <div role="alert" class="alert alert-warning">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <span><p>💡 다음 사물에 집중</p>달력, 일기장, 편지 봉투, 참빛</span>
                 </div>
-                <h1 className='my-5'><p className='text-6xl'>Hint</p><p className='text-2xl'>1단계, 2단계에 각각 2개씩의 힌트를 요구할 수 있습니다.</p></h1>
-                <button className='btn btn-secondary' onClick={() => {
+                <h1 className='my-5'><p className='text-6xl text-[red] flex gap-5 my-3'><FaKey />Hint</p><p className='text-2xl'>1단계, 2단계에 각각 2개씩의 힌트를 획득할 수 있습니다.</p><p className='text-2xl'>한 번 확인한 힌트는 잘 메모해두시기 바랍니다.</p></h1>
+                <button className='btn btn-info' onClick={() => {
                     setGetHint(prev => !prev)
+                    setHintFloor(0)
                 }}>힌트 얻기</button>
                 {
                     getHint &&
                     <div className='my-5'>
                         힌트를 얻을 단계를 선택하세요
                         <details class="dropdown">
-                            <summary class="m-1 btn btn-warning">선택</summary>
+                            <summary class="m-1 btn btn-info">선택</summary>
                             <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                             <li><button onClick={() => {
                                 setHintFloor(1)
@@ -100,7 +120,7 @@ function EscapeRoom() {
                 {
                     hintFloor === 1 &&
                     <div className='my-5'>
-                        <h1>힌트를 얻을 항목을 선택하세요</h1>
+                        <h1 className='my-5'>힌트를 얻을 항목을 선택하세요</h1>
                         <div className='flex gap-5'>
                             {
                                 hintList1.map(hint => {
@@ -140,7 +160,7 @@ function EscapeRoom() {
                 {
                     hintFloor === 2 && 
                     <div className='my-5'>
-                        <h1>힌트를 얻을 자리수를 선택하세요</h1>
+                        <h1 className='my-5'>힌트를 얻을 자리수를 선택하세요</h1>
                         <div className='flex gap-5'>
                             {
                                 hintList2.map(hint => {
