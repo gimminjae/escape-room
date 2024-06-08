@@ -70,9 +70,10 @@ function EscapeRoom() {
         <>
         {
             !loginedTeam &&
-            <div className='container mx-auto w-1/2'>
+            <div className='container mx-auto w-1/2 flex justify-center align-center'>
+                <div>
                 <p>팀 아이디를 입력하세요</p>
-                <input type="text" value={team} onChange={(e) => setTeam(e.target.value)}/>
+                <input className='border-solid border-2 border-indigo-600' type="text" value={team} onChange={(e) => setTeam(e.target.value)}/>
                 <button className='btn btn-primary mx-5' onClick={() => {
                     cookie.set('team', team)
                     if (!idList.includes(team)) {
@@ -81,6 +82,7 @@ function EscapeRoom() {
                     }
                     window.location.href = window.location.href
                 }}>Go Go</button>
+                </div>
             </div>
         }
         {
